@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Income Report</h1>
+{% for income in income %}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">Income Sources</span>
+        <p>Yearly Salary: ${{ income.yearly_salary }}</p>
+        <p>Other Income: ${{ income.other_income }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'income_update' income.id %}">Edit</a>
+        <a href="{% url 'income_delete' income.id %}">Delete</a>
+    </div>
+</div>
+{% endfor %}
+
+<p>Yearly Income: ${{ yearly_income }}</p>
+<p>Monthly Income: ${{ rounded_monthly_income }}</p>
+{% endblock %}

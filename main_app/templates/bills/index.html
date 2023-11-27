@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Bill Report</h1>
+{% for bill in bills %}
+<div class="card">
+    <div class="card-content">
+        <span class="card-title">{{ bill.name }}</span>
+        <p>Category: {{ bill.category }}</p>
+        <p>Frequency: {{ bill.frequency }}</p>
+        <p>Amount: ${{ bill.amount }}</p>
+    </div>
+    <div class="card-action">
+        <a href="{% url 'bills_update' bill.id %}">Edit</a>
+        <a href="{% url 'bills_delete' bill.id %}">Delete</a>
+    </div>
+</div>
+{% endfor %}
+<p>Total Monthly Bills: ${{ monthly_bills }}</p>
+<p>Yearly Bills: ${{ yearly_bills }}</p>
+
+{% endblock %}
