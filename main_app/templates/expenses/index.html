@@ -11,8 +11,10 @@
         <p>Amount: ${{ expense.amount }}</p>
     </div>
     <div class="card-action">
+        <form action="" method="POST">
         <a href="{% url 'expenses_update' expense.id %}">Edit</a>
-        <a href="{% url 'expenses_delete' expense.id %}">Delete</a>
+        <input type="submit" value="Delete" class="btngit ">
+        </form>
     </div>
 </div>
 {% endfor %}
