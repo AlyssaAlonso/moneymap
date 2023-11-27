@@ -11,7 +11,7 @@
         <p>Amount: ${{ bill.amount }}</p>
     </div>
     <div class="card-action">
-        <form action="{% url 'income_delete' income.id %}" method="POST">
+        <form action="{% url 'bills_delete' bill.id %}" method="POST">
         {% csrf_token %}
         <a href="{% url 'bills_update' bill.id %}">Edit</a>
         <input type="submit" value="Delete" class="btn">
