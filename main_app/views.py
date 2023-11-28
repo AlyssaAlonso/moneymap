@@ -21,7 +21,7 @@ def finhealth_index(request):
   monthly_bills = sum(bill.amount for bill in bills)
   yearly_bills = monthly_bills * 12
   income= Income.objects.filter(user=request.user)
-  yearly_income= sum(income.yearly_salary + income.other_income for income in income)
+  yearly_income= sum(income.amount for income in income)
   monthly_income= yearly_income / 12
   rounded_monthly_income = round(monthly_income, 2)
   expenses= Expenses.objects.filter(user=request.user)
@@ -39,7 +39,7 @@ def bills_index(request):
 @login_required
 def income_index(request):
   income= Income.objects.filter(user=request.user)
-  yearly_income= sum(income.yearly_salary + income.other_income for income in income)
+  yearly_income= sum(income.amount for income in income)
   monthly_income= yearly_income / 12
   rounded_monthly_income = round(monthly_income, 2)
   return render(request, 'income/index.html', {'income': income, 'yearly_income': yearly_income, 'monthly_income': monthly_income, 'rounded_monthly_income': rounded_monthly_income})
@@ -53,7 +53,7 @@ def expenses_index(request):
 
 class IncomeCreate(LoginRequiredMixin, CreateView):
     model=Income
-    fields = ['yearly_salary', 'other_income']
+    fields = ['name', 'amount', 'category']
     success_url = '/expenses/create'
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -61,7 +61,7 @@ class IncomeCreate(LoginRequiredMixin, CreateView):
 
 class IncomeUpdate(LoginRequiredMixin, UpdateView):
     model=Income
-    fields= ['yearly_salary', 'other_income']
+    fields = ['name', 'amount', 'category']
     success_url = '/income'
 
 class IncomeDelete(LoginRequiredMixin, DeleteView):
