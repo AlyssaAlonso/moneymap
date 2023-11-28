@@ -36,7 +36,21 @@ def finhealth_index(request):
     and 30 < bill_spending_percent <= 35
   ):
     financial_health_grade = 'A'
-  
+  elif (
+    55 < needs_percent <=60
+    and 15 <= savings_percent < 17
+    and 18 < nonessential_percent <= 20
+    and 35 < bill_spending_percent <= 40
+  ):
+    financial_health_grade = 'B+'
+  elif(
+    60 < needs_percent <= 65
+    and 13 <= savings_percent < 15
+    and 21 < nonessential_percent <= 18
+    and 40 < bill_spending_percent <= 45
+  ):
+    financial_health_grade = 'B'
+    
   return render(request, 'finhealth/index.html', {
     'finhealth': finhealth, 
     'bills': bills, 
