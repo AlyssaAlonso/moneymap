@@ -17,7 +17,12 @@ def finhealth_index(request):
   total_expenses = sum(expense.amount for expense in expenses)
   yearly_estimated_expenses = total_expenses * 12
 
+  needs_percent = (yearly_bills + yearly_expenses) / yearly_income * 100
+  savings_percent = ((yearly_income - (yearly_bills + yearly_estimated_expenses)) / yearly_income) * 100
+  nonessential_percent = (sum(expense.amount for expense in expenses) / yearly_income) * 100
+  bill_spending_percent = (sum(bill.amount for bill in bills) / yearly_income) * 100
 
+  
   return render(request, 'finhealth/index.html', {
     'finhealth': finhealth, 
     'bills': bills, 
