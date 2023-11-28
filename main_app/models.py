@@ -14,8 +14,9 @@ from django.urls import reverse
 
 class Income(models.Model):
     id = models.AutoField(primary_key=True)
-    yearly_salary = models.IntegerField()
-    other_income = models.IntegerField()
+    name = models.CharField(max_length=255, null=True, blank=True)
+    amount = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
+    category = models.CharField(max_length=255, null=True, blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
