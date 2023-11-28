@@ -1,20 +1,17 @@
-{% extends 'base.html' %}
-
-{% block content %}
-{% if object %}
+{% extends 'base.html' %} {% block content %} {% if object %}
 <h1>Edit Bill Info</h1>
 {% else %}
-<h1>Add Monthly Bill Info</h1>
+<h1>Add A Monthly Bill</h1>
 {% endif %}
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
 <form action="" method="POST">
-    <!-- Django requires the following for security purposes -->
-    {% csrf_token %}
-    <table>
-        <!-- Render the inputs inside of <tr>s & <td>s -->
-        {{ form.as_table }}
-    </table>
-    <input type="submit" value="Submit!" class="btn">
-    <a href="/finhealth" class="btn waves-effect waves-light">Next</a>
+  <!-- Django requires the following for security purposes -->
+  {% csrf_token %}
+  <table>
+    <!-- Render the inputs inside of <tr>s & <td>s -->
+    {{ form.as_table }}
+  </table>
+  <input type="submit" value="Submit!" class="btn" />
+  <a href="/finhealth" class="btn waves-effect waves-light">Next</a>
 </form>
 {% endblock %}
