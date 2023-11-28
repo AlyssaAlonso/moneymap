@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from datetime import date
+
+EXPENSES = (
+  ('Essential', 'Essential'),
+  ('Nonessential', 'Nonessential'),
+)
 
 # class User(models.Model):
 #     id = models.AutoField(primary_key=True)
@@ -32,16 +38,23 @@ class Bill(models.Model):
     def __str__(self):
         return f"{self.name} - {self.user.username}"
 
-class Expenses(models.Model):
+class Expense(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
+    date = models.DateField('Expense Date')
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    date = models.DateField()
-    category = models.CharField(max_length=255)
+    category = models.CharField(
+        max_length=255, 
+        choices=EXPENSES, 
+        default=EXPENSES[0][0]
+        )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return f"{self.name} - {self.user.username}"
+    
+    class Meta:
+        ordering = ['-date']
 
 class FinancialHealth(models.Model):
     id = models.AutoField(primary_key=True)

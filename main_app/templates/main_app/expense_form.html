@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %} {% if object %}
+<h1>Edit Expense</h1>
+{% else %}
+<h1>Add a Monthly Expense</h1>
+{% endif %}
+<form action="" method="POST">
+  {% csrf_token %}
+  <!-- Render the inputs -->
+  {{ form.as_p }}
+  <input type="submit" value="Submit!" class="btn" />
+  <a href="/bills/create" class="btn waves-effect waves-light">Next</a>
+</form>
+
+<script>
+  const dateEl = document.getElementById("id_date");
+  M.Datepicker.init(dateEl, {
+    format: "yyyy-mm-dd",
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true,
+  });
+
+  const selectEl = document.getElementById("id_category");
+  M.FormSelect.init(selectEl);
+</script>
+{% endblock %}
