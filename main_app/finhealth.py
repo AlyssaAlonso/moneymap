@@ -22,7 +22,14 @@ def finhealth_index(request):
   nonessential_percent = (sum(expense.amount for expense in expenses) / yearly_income) * 100
   bill_spending_percent = (sum(bill.amount for bill in bills) / yearly_income) * 100
 
-  
+  if (
+    needs_percent <= 50
+    and savings_percent >= 20
+    and nonessential_percent <= 15
+    and bill_spending_percent <= 30
+  ):
+    financial_health_grade= 'A+'
+    
   return render(request, 'finhealth/index.html', {
     'finhealth': finhealth, 
     'bills': bills, 
