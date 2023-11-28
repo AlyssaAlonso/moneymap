@@ -6,9 +6,8 @@
 <div class="card">
   <div class="card-content">
     <span class="card-title">{{ bill.name }}</span>
-    <p>Category: {{ bill.category }}</p>
-    <p>Frequency: {{ bill.frequency }}</p>
     <p>Amount: ${{ bill.amount }}</p>
+    <p>Category: {{ bill.category }}</p>
   </div>
   <div class="card-action">
     <form action="{% url 'bills_delete' bill.id %}" method="POST">
