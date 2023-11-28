@@ -5,9 +5,9 @@
 {% for income in income %}
 <div class="card">
   <div class="card-content">
-    <span class="card-title">Income Sources</span>
-    <p>Yearly Salary: ${{ income.yearly_salary }}</p>
-    <p>Other Income: ${{ income.other_income }}</p>
+    <span class="card-title">{{ income.name }}</span>
+    <p>Amount: ${{ income.amount }}</p>
+    <p>Category: {{ income.category }}</p>
   </div>
   <div class="card-action">
     <form action="{% url 'income_delete' income.id %}" method="POST">
