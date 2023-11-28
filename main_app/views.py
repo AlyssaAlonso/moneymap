@@ -4,7 +4,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Bills, User, Income, Expenses, FinancialHealth
+from .models import Bill, User, Income, Expenses, FinancialHealth
 from .forms import UserForm
 
 # Create your views here.
@@ -17,7 +17,7 @@ def about(request):
 @login_required
 def finhealth_index(request):
   finhealth= FinancialHealth.objects.filter(user=request.user)
-  bills= Bills.objects.filter(user=request.user)
+  bills= Bill.objects.filter(user=request.user)
   monthly_bills = sum(bill.amount for bill in bills)
   yearly_bills = monthly_bills * 12
   income= Income.objects.filter(user=request.user)
@@ -31,7 +31,7 @@ def finhealth_index(request):
 
 @login_required
 def bills_index(request):
-  bills= Bills.objects.filter(user=request.user)
+  bills= Bill.objects.filter(user=request.user)
   monthly_bills = sum(bill.amount for bill in bills)
   yearly_bills = monthly_bills * 12
   return render(request, 'bills/index.html', {'bills': bills, 'monthly_bills': monthly_bills, 'yearly_bills': yearly_bills})
@@ -85,21 +85,21 @@ class ExpensesDelete(LoginRequiredMixin, DeleteView):
     model=Expenses
     success_url = '/expenses'
 
-class BillsCreate(LoginRequiredMixin, CreateView):
-    model=Bills
-    fields = ['name', 'frequency', 'category', 'amount']
+class BillCreate(LoginRequiredMixin, CreateView):
+    model=Bill
+    fields = ['name', 'amount', 'category']
     success_url = '/bills/create'
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
-class BillsUpdate(LoginRequiredMixin, UpdateView):
-    model=Bills
+class BillUpdate(LoginRequiredMixin, UpdateView):
+    model=Bill
     fields= ['name', 'frequency', 'category', 'amount']
     success_url = '/bills'
 
-class BillsDelete(LoginRequiredMixin, DeleteView):
-    model=Bills
+class BillDelete(LoginRequiredMixin, DeleteView):
+    model=Bill
     success_url = '/bills'
 
 def signup(request):
