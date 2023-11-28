@@ -1,22 +1,22 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>Expense Report</h1>
+<h3><a href="{% url 'expenses_create' %}">Add an Expense</a></h3>
 {% for expense in expenses %}
 <div class="card">
-    <div class="card-content">
-        <span class="card-title">{{ expense.name }}</span>
-        <p>Category: {{ expense.category }}</p>
-        <p>Date: {{ expense.date }}</p>
-        <p>Amount: ${{ expense.amount }}</p>
-    </div>
-    <div class="card-action">
-        <form action="{% url 'expenses_delete' expense.id %}" method="POST">
-            {% csrf_token %}
-        <a href="{% url 'expenses_update' expense.id %}">Edit</a>
-        <input type="submit" value="Delete" class="btn">
-        </form>
-    </div>
+  <div class="card-content">
+    <span class="card-title">{{ expense.name }}</span>
+    <p>Category: {{ expense.category }}</p>
+    <p>Date: {{ expense.date }}</p>
+    <p>Amount: ${{ expense.amount }}</p>
+  </div>
+  <div class="card-action">
+    <form action="{% url 'expenses_delete' expense.id %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'expenses_update' expense.id %}">Edit</a>
+      <input type="submit" value="Delete" class="btn" />
+    </form>
+  </div>
 </div>
 {% endfor %}
 <p>Total Monthly Expenses: ${{ total_expenses }}</p>

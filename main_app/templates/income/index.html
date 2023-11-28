@@ -1,21 +1,21 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>Income Report</h1>
+<h3><a href="{% url 'income_create' %}">Add an Income</a></h3>
 {% for income in income %}
 <div class="card">
-    <div class="card-content">
-        <span class="card-title">Income Sources</span>
-        <p>Yearly Salary: ${{ income.yearly_salary }}</p>
-        <p>Other Income: ${{ income.other_income }}</p>
-    </div>
-    <div class="card-action">
-        <form action="{% url 'income_delete' income.id %}" method="POST">
-        {% csrf_token %}
-        <a href="{% url 'income_update' income.id %}">Edit</a>
-        <input type="submit" value="Delete" class="btn">
-        </form>
-    </div>
+  <div class="card-content">
+    <span class="card-title">{{ income.name }}</span>
+    <p>Amount: ${{ income.amount }}</p>
+    <p>Category: {{ income.category }}</p>
+  </div>
+  <div class="card-action">
+    <form action="{% url 'income_delete' income.id %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'income_update' income.id %}">Edit</a>
+      <input type="submit" value="Delete" class="btn" />
+    </form>
+  </div>
 </div>
 {% endfor %}
 
