@@ -211,7 +211,30 @@ def finhealth_index(request):
   ):
     savings_score = 50
 
- 
+  financial_health_score = (needs_score + savings_score + nonessential_score + essential_score) / 4 
+
+  if financial_health_score == 100:
+    financial_health_grade = 'A+'
+  elif 95 <= financial_health_score < 100:
+    financial_health_grade = 'A'
+  elif 90 <= financial_health_score < 95:
+    financial_health_grade = 'A-'
+  elif 85 <= financial_health_score < 90:
+    financial_health_grade = 'B+'
+  elif 80 <= financial_health_score < 85:
+    financial_health_grade = 'B'
+  elif 75 <= financial_health_score < 80:
+    financial_health_grade = 'C+'
+  elif 70 <= financial_health_score < 75:
+    financial_health_grade = 'C'
+  elif 65 <= financial_health_score < 70:
+    financial_health_grade = 'D+'
+  elif 60 <= financial_health_score < 65:
+    financial_health_grade = 'D'
+  elif 0 <= financial_health_score < 60:
+    financial_health_grade = 'F'
+  else:
+    financial_health_grade = 'Not Specified!'
 
   return render(request, 'finhealth/index.html', {
     'finhealth': finhealth, 
