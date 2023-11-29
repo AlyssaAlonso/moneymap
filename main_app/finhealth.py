@@ -1,4 +1,4 @@
-from .models import Bill, User, Income, Expenses, FinancialHealth
+from .models import Bill, User, Income, Expense, FinancialHealth
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
