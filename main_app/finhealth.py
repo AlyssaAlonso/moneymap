@@ -121,7 +121,52 @@ def finhealth_index(request):
   ):
     nonessential_score = 50
 
-  
+  if (
+    essential_percent <= 30 
+  ):
+    essential_score = 100
+  elif (
+    30 < essential_percent <= 33
+  ):
+    essential_score = 95
+  elif (
+    33 < essential_percent <= 35
+  ):
+    essential_score = 90
+  elif(
+    35 < essential_percent <= 38
+  ):
+    essential_score = 85
+  elif(
+    38 < essential_percent <= 41
+  ):
+    essential_score = 80
+  elif(
+    41 < essential_percent <= 44
+  ):
+    essential_score = 75
+  elif(
+    44 < essential_percent <= 47
+  ):
+    essential_score = 70
+  elif(
+    47 < essential_percent <= 50
+  ):
+    essential_score = 65
+  elif(
+    50 < essential_percent <= 53
+  ):
+    essential_score = 60
+  elif(
+    53 < essential_percent <= 56
+  ):
+    essential_score = 55
+  elif(
+    56 < essential_percent <= 59
+  ):
+    essential_score = 50
+
+ 
 
   return render(request, 'finhealth/index.html', {
     'finhealth': finhealth, 
