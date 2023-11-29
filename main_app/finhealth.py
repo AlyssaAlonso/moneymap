@@ -259,3 +259,11 @@ def finhealth_index(request):
     'essential_score' : essential_score,
     },
 )
+
+def get_recommendation(needs_score, nonessential_score, essential_score, savings_score):
+    recommendations = []
+
+    if needs_score == 100:
+        recommendations.append("Congratulations! Your needs spending is well within budget.")
+    elif needs_score > 75:
+        recommendations.append("Consider optimizing your needs spending. Look for cost-effective alternatives or discounts.")
