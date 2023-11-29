@@ -7,8 +7,12 @@
   {% csrf_token %}
   <!-- Render the inputs -->
   {{ form.as_p }}
-  <input type="submit" value="Submit!" class="btn" />
-  <a href="/bills/create" class="btn waves-effect waves-light">Next</a>
+  <input type="submit" value="Submit" class="btn" />
+  {% if not object %}
+  <a href="{% url 'bills_create' %}" class="btn waves-effect waves-light"
+    >Next</a
+  >
+  {% endif %}
 </form>
 
 <script>

@@ -55,7 +55,7 @@ def expenses_index(request):
 
 class IncomeCreate(LoginRequiredMixin, CreateView):
     model = Income
-    success_url = '/expenses/create'
+    success_url = '/income/create'
     
     class IncomeCreateForm(forms.ModelForm):
         INCOMES = (
