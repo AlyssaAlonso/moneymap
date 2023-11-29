@@ -31,6 +31,51 @@ def finhealth_index(request):
   nonessential_percent = ((total_nonessential_bills + total_nonessential_expenses) / yearly_income) * 100
   essential_percent = ((total_essential_bills + total_essential_expenses) / yearly_income) * 100
 
+  if (
+    needs_percent <= 50 
+  ):
+    needs_score = 100
+  elif (
+    50 < needs_percent <= 55
+  ):
+    needs_score = 95
+  elif (
+    55 < needs_percent <=60
+  ):
+    needs_score = 90
+  elif(
+    60 < needs_percent <= 65
+  ):
+    needs_score = 85
+  elif(
+    65 < needs_percent <= 70
+  ):
+    needs_score = 80
+  elif(
+    70 < needs_percent <= 75
+  ):
+    needs_score = 75
+  elif(
+    75 < needs_percent <= 80
+  ):
+    needs_score = 70
+  elif(
+    80 < needs_percent <= 85
+  ):
+    needs_score = 65
+  elif(
+    85 < needs_percent <= 90
+  ):
+    needs_score = 60
+  elif(
+    90 < needs_percent <= 95
+  ):
+    needs_score = 55
+  elif(
+    95 < needs_percent <= 100
+  ):
+    needs_score = 50
+
   
 
   return render(request, 'finhealth/index.html', {
