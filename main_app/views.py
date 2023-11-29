@@ -16,6 +16,10 @@ def about(request):
   return render(request, 'about.html')
 
 @login_required
+def fincalc_index(request):
+  return render(request, 'fincalc/index.html')
+
+@login_required
 def finhealth_index(request):
   finhealth= FinancialHealth.objects.filter(user=request.user)
   bills= Bill.objects.filter(user=request.user)
