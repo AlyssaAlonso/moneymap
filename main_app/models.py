@@ -52,5 +52,15 @@ class FinancialHealth(models.Model):
     def __str__(self):
         return f"Financial Health for {self.user.username}"
 
+class Location(models.Model):
+    state = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.state}"
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f"Profile for {self.user.username}"

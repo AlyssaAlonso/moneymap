@@ -5,10 +5,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .finhealth import finhealth_index
-from .models import Bill, User, Income, Expenses, FinancialHealth
+from .models import Bill, User, Income, Expenses, FinancialHealth, Location
 from .forms import UserForm
 
-# Create your views here.
 def home(request):
   return render(request, 'home.html')
 
