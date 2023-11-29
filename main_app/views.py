@@ -6,15 +6,18 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .finhealth import finhealth_index
-from .models import Bill, User, Income, Expense, FinancialHealth
+from .models import Bill, User, Income, Expense, FinancialHealth, Location
 from .forms import UserForm
 
-# Create your views here.
 def home(request):
   return render(request, 'home.html')
 
 def about(request):
   return render(request, 'about.html')
+
+@login_required
+def fincalc_index(request):
+  return render(request, 'fincalc/index.html')
 
 @login_required
 def finhealth_index(request):
@@ -55,7 +58,7 @@ def expenses_index(request):
 
 class IncomeCreate(LoginRequiredMixin, CreateView):
     model = Income
-    success_url = '/expenses/create'
+    success_url = '/income/create'
     
     class IncomeCreateForm(forms.ModelForm):
         INCOMES = (
