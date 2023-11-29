@@ -14,7 +14,12 @@ footer.page-footer {
   background-color: #018060;
 }
 
-a:hover {
+.btn {
+  background-color: #018060;
+}
+
+a:hover,
+.btn:hover {
   color: #dcbb57;
 }
 
