@@ -14,8 +14,15 @@
   <input type="submit" value="Submit" class="btn" />
 
   {% if not object %}
-    <a href="{% url 'expenses_create' %}" class="btn waves-effect waves-light">Next</a>
-{% endif %}
+  <br />
+  <br />
+  <a href="{% url 'fincalc_index' %}" class="btn waves-effect waves-light"
+    >Back</a
+  >
+  <a href="{% url 'expenses_create' %}" class="btn waves-effect waves-light"
+    >Next</a
+  >
+  {% endif %}
 </form>
 
 <script>

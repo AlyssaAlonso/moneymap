@@ -9,6 +9,11 @@
   {{ form.as_p }}
   <input type="submit" value="Submit" class="btn" />
   {% if not object %}
+  <br />
+  <br />
+  <a href="{% url 'income_create' %}" class="btn waves-effect waves-light"
+    >Back</a
+  >
   <a href="{% url 'bills_create' %}" class="btn waves-effect waves-light"
     >Next</a
   >
