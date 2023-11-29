@@ -14,13 +14,17 @@ footer.page-footer {
   background-color: #018060;
 }
 
+a:hover {
+  color: #dcbb57;
+}
+
 .btn {
   background-color: #018060;
 }
 
-a:hover,
 .btn:hover {
   color: #dcbb57;
+  background-color: #317058;
 }
 
 .moneymap-logo {
@@ -37,4 +41,12 @@ a:hover,
 .row-img {
   width: 100%;
   height: auto;
+}
+
+.table-container {
+  margin-left: 0px;
+}
+
+div.col.s8.table-col {
+  padding: 0px;
 }
