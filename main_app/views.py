@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .finhealth import finhealth_index
 from .models import Bill, User, Income, Expense, FinancialHealth, Location
-from .forms import UserForm
+from .forms import UserForm, Profile
 
 def home(request):
   return render(request, 'home.html')
@@ -151,16 +151,28 @@ class BillDelete(LoginRequiredMixin, DeleteView):
     success_url = '/bills'
 
 def signup(request):
-  error_message = ''
-  if request.method == 'POST':
-    form = UserForm(request.POST)
-    if form.is_valid():
-      user = form.save()
-      login(request, user)
-      return redirect('/')
-    else:
-      error_message = 'Invalid sign up - try again'
-  form = UserForm()
-  context = {'form': form, 'error_message': error_message}
-  return render(request, 'registration/signup.html', context)
+    error_message = ''
+    if request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.email = form.cleaned_data['email']
+            user.save()
+
+            profile, created = Profile.objects.get_or_create(user=user)
+
+            location = Location.objects.create(
+                state=form.cleaned_data['state']
+            )
+            profile.location = location
+            profile.save()
+
+            login(request, user)
+            return redirect('/')
+        else:
+            error_message = 'Invalid sign up - try again'
+
+    form = UserForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
