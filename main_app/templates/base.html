@@ -33,7 +33,7 @@
             </li>
           </ul>
           <ul class="right">
-            <li><a href="/about">About Us</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
             {% if user.is_authenticated %}
             <li>
               <a href="{% url 'fincalc_index' %}"
@@ -46,13 +46,15 @@
               >
             </li>
             <ul id="dropdown1" class="dropdown-content">
-              <li><a href="/finhealth">Financial Health</a></li>
+              <li>
+                <a href="{% url 'finhealth_index' %}">Financial Health</a>
+              </li>
               <li class="divider"></li>
-              <li><a href="/income">Income Report</a></li>
+              <li><a href="{% url 'income_index' %}">Income Report</a></li>
               <li class="divider"></li>
-              <li><a href="/expenses">Expense Report</a></li>
+              <li><a href="{% url 'expenses_index' %}">Expense Report</a></li>
               <li class="divider"></li>
-              <li><a href="/bills">Bill Report</a></li>
+              <li><a href="{% url 'bills_index' %}">Bill Report</a></li>
             </ul>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
