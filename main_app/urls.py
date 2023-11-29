@@ -5,6 +5,7 @@ from .views import ExpenseCreate
 urlpatterns = [
   path('', views.home, name='home'),
   path('about/', views.about, name='about' ),
+  path('fincalc/', views.fincalc_index, name='fincalc_index'),
   path('finhealth/', views.finhealth_index, name='finhealth_index'),
   path('bills/', views.bills_index, name='bills_index'),    
   path('bills/create/', views.BillCreate.as_view(), name='bills_create'),   
