@@ -6,11 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .finhealth import finhealth_index
-<<<<<<< HEAD
-from .models import Bill, User, Income, Expenses, FinancialHealth, Location
-=======
-from .models import Bill, User, Income, Expense, FinancialHealth
->>>>>>> 7566637b4830bb08cc18f51161be35885652a4a0
+from .models import Bill, User, Income, Expense, FinancialHealth, Location
 from .forms import UserForm
 
 def home(request):
