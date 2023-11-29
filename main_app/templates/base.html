@@ -36,19 +36,30 @@
             <li><a href="{% url 'about' %}">About Us</a></li>
             {% if user.is_authenticated %}
             <li>
+              <a class="dropdown-trigger" href="#" data-target="dropdown1">Financial Health Calculator</a>
+
               <a href="{% url 'fincalc_index' %}"
                 >Financial Health Calculator</a
               >
+
             </li>
+                                <ul id="dropdown1" class="dropdown-content">
+                                  <li><a href="/income/create">Add Income Info</a></li>
+                                  <li><a href="/expenses/create">Add Expense Info</a></li>
+                                  <li><a href="/bills/create">Add Bill Info</a></li>
+                                </ul>
             <li>
-              <a class="dropdown-trigger" href="#" data-target="dropdown1"
+              <a class="dropdown-trigger" href="#" data-target="dropdown2"
                 >My Finances</a
               >
             </li>
+            <ul id="dropdown2" class="dropdown-content">
+              <li><a href="/finhealth">Financial Health</a></li>
             <ul id="dropdown1" class="dropdown-content">
               <li>
                 <a href="{% url 'finhealth_index' %}">Financial Health</a>
               </li>
+
               <li class="divider"></li>
               <li><a href="{% url 'income_index' %}">Income Report</a></li>
               <li class="divider"></li>
