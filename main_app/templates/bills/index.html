@@ -12,7 +12,7 @@
   <div class="card-action">
     <form action="{% url 'bills_delete' bill.id %}" method="POST">
       {% csrf_token %}
-      <a href="{% url 'bills_update' bill.id %}">Edit</a>
+      <a href="{% url 'bills_update' bill.id %}" class="btn">Edit</a>
       <input type="submit" value="Delete" class="btn" />
     </form>
   </div>
