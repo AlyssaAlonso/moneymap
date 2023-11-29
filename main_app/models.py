@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from datetime import date
 
+INCOMES = (
+    ('Earned', 'Earned'),
+    ('Passive', 'Passive'),
+    ('Portfolio', 'Portfolio'),
+)
+
 BILLS = (
   ('Essential', 'Essential'),
   ('Nonessential', 'Nonessential'),
@@ -27,7 +33,11 @@ class Income(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, null=True, blank=True)
     amount = models.DecimalField(default=0.00, max_digits=10, decimal_places=2)
-    category = models.CharField(max_length=255, null=True, blank=True)
+    category = models.CharField(
+        max_length=255, 
+        choices=INCOMES, 
+        default=INCOMES[0][0]
+        )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
