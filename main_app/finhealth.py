@@ -166,6 +166,51 @@ def finhealth_index(request):
   ):
     essential_score = 50
 
+  if (
+    savings_percent >= 30 
+  ):
+    savings_score = 100
+  elif (
+    25 <= savings_percent < 30
+  ):
+    savings_score = 95
+  elif (
+    20 <= savings_percent < 25
+  ):
+    savings_score = 90
+  elif(
+    17 <= savings_percent < 20
+  ):
+    savings_score = 85
+  elif(
+    15 <= savings_percent < 17
+  ):
+    savings_score = 80
+  elif(
+    13 <= savings_percent < 15
+  ):
+    savings_score = 75
+  elif(
+    11 <= savings_percent < 13
+  ):
+    savings_score = 70
+  elif(
+    9 <= savings_percent < 11
+  ):
+    savings_score = 65
+  elif(
+    7 <= savings_percent < 9
+  ):
+    savings_score = 60
+  elif(
+    4 <= savings_percent < 7
+  ):
+    savings_score = 55
+  elif(
+    1 <= savings_percent < 4
+  ):
+    savings_score = 50
+
  
 
   return render(request, 'finhealth/index.html', {
