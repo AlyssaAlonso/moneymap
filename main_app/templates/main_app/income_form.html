@@ -4,21 +4,24 @@
 <h1>Add Yearly Income</h1>
 {% endif %}
 <!-- Leaving the action empty makes the form post to the same url used to display it -->
-<form action="" method="POST">
-  <!-- Django requires the following for security purposes -->
-  {% csrf_token %}
-  <table>
-    <!-- Render the inputs inside of <tr>s & <td>s -->
-    {{ form.as_p }}
-  </table>
-  <input type="submit" value="Submit" class="btn" />
-
-  {% if not object %}
-  <br />
-  <br />
-  <a href="{% url 'expenses_create' %}" class="btn">Next</a>
-  {% endif %}
-</form>
+<div class="card">
+  <div class="card-content">
+    <form action="" method="POST">
+      <!-- Django requires the following for security purposes -->
+      {% csrf_token %}
+      <table>
+        <!-- Render the inputs inside of <tr>s & <td>s -->
+        {{ form.as_p }}
+      </table>
+      <br />
+      <input type="submit" value="Submit" class="btn" />
+    </form>
+  </div>
+</div>
+{% if not object %}
+<br />
+<a href="{% url 'expenses_create' %}" class="btn">Next: Monthly Expenses</a>
+{% endif %}
 
 <script>
   const selectEl = document.getElementById("id_category");

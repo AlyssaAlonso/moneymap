@@ -3,19 +3,22 @@
 {% else %}
 <h1>Add a Monthly Expense</h1>
 {% endif %}
-<form action="" method="POST">
-  {% csrf_token %}
-  <!-- Render the inputs -->
-  {{ form.as_p }}
-  <input type="submit" value="Submit" class="btn" />
-  {% if not object %}
-  <br />
-  <br />
-  <a href="{% url 'income_create' %}" class="btn">Previous</a>
-  <a href="{% url 'bills_create' %}" class="btn">Next: Monthly Bills</a>
-  {% endif %}
-</form>
-
+<div class="card">
+  <div class="card-content">
+    <form action="" method="POST">
+      {% csrf_token %}
+      <!-- Render the inputs -->
+      {{ form.as_p }}
+      <br />
+      <input type="submit" value="Submit" class="btn" />
+    </form>
+  </div>
+</div>
+{% if not object %}
+<br />
+<a href="{% url 'income_create' %}" class="btn">Previous</a>
+<a href="{% url 'bills_create' %}" class="btn">Next: Monthly Bills</a>
+{% endif %}
 <script>
   const dateEl = document.getElementById("id_date");
   M.Datepicker.init(dateEl, {
