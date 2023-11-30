@@ -1,43 +1,78 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
 <h1>Financial Health</h1>
 
-<div class="container table-container">
-  <div class="row">
-    <div class="col s8 table-col">
-      <table class="striped responsive-table">
-        <tbody>
-          <tr>
-            <td>User</td>
-            <td>Username</td>
-          </tr>
-          <tr>
-            <td>Yearly Income</td>
-            <td>${{yearly_income}}</td>
-          </tr>
-          <tr>
-            <td>Monthly Income</td>
-            <td>${{rounded_monthly_income}}</td>
-          </tr>
-          <tr>
-            <td>Yearly Expenses</td>
-            <td>${{ yearly_estimated_expenses }}</td>
-          </tr>
-          <tr>
-            <td>Monthly Expenses</td>
-            <td>${{ total_expenses }}</td>
-          </tr>
-          <tr>
-            <td>Yearly Bills</td>
-            <td>${{yearly_bills}}</td>
-          </tr>
-          <tr>
-            <td>Monthly Bills</td>
-            <td>${{monthly_bills}}</td>
-          </tr>
-        </tbody>
-      </table>
+<div class="container">
+    <div class="row">
+        <div class="col s8">
+            <table class="striped">
+                <tbody>
+                    <tr>
+                        <td>User</td>
+                        <td>Username</td>
+                    </tr>
+                    <tr>
+                        <td>Yearly Income</td>
+                        <td>${{ yearly_income }}</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Income</td>
+                        <td>${{ rounded_monthly_income }}</td>
+                    </tr>
+                    <tr>
+                        <td>Yearly Expenses</td>
+                        <td>${{ yearly_estimated_expenses }}</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Expenses</td>
+                        <td>${{ total_expenses }}</td>
+                    </tr>
+                    <tr>
+                        <td>Yearly Bills</td>
+                        <td>${{ yearly_bills }}</td>
+                    </tr>
+                    <tr>
+                        <td>Monthly Bills</td>
+                        <td>${{ monthly_bills }}</td>
+                    </tr>
+                    <!-- Add new rows for scores and recommendations -->
+                    <tr>
+                        <td>Needs Score</td>
+                        <td>{{ needs_score }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nonessential Score</td>
+                        <td>{{ nonessential_score }}</td>
+                    </tr>
+                    <tr>
+                        <td>Essential Score</td>
+                        <td>{{ essential_score }}</td>
+                    </tr>
+                    <tr>
+                        <td>Savings Score</td>
+                        <td>{{ savings_score }}</td>
+                    </tr>
+                    <tr>
+                        <td>Needs Recommendation</td>
+                        <td>{{ needs_recommendation }}</td>
+                    </tr>
+                    <tr>
+                        <td>Nonessential Recommendation</td>
+                        <td>{{ nonessential_recommendation }}</td>
+                    </tr>
+                    <tr>
+                        <td>Essential Recommendation</td>
+                        <td>{{ essential_recommendation }}</td>
+                    </tr>
+                    <tr>
+                        <td>Savings Recommendation</td>
+                        <td>{{ savings_recommendation }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}
