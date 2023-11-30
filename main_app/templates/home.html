@@ -1,35 +1,50 @@
 {% extends 'base.html' %} {% block content %}
-<body class="homepage-body">
-  <div class="homepage-content">
-    <div class="homepage-header">
-      <h1>Money management <br />made <span>easy</span></h1>
+<div class="home-container">
+  <div class="row">
+    <div id="text-box" class="col s12 m6">
+      <h4>Welcome to MoneyMap!</h4>
+      <p class="home-text">Enter a realm of personalized financial empowerment, acknowledging that your journey to financial success is distinct.
+      Whether you're beginning or advancing your financial well-being, our platform caters to your individual needs. Discover
+      the tools, insights, and guidance to navigate your financial adventure with confidence. Begin your MoneyMap journey today and experience a
+      platform that prioritizes your financial goals.</p>
     </div>
-    <p>
-      Seamlessly manage your finances, track your expenses, and gain valuable
-      insights to steer your financial journey. With MoneyMap, take charge of
-      your financial well-being effortlessly. Visualize your financial
-      landscape, set goals, and make informed decisions that align with your
-      aspirations. From budgeting to optimizing spending, our intuitive tools
-      empower you to navigate towards financial success. Start mapping your path
-      to financial freedom today
-    </p>
-    {% if user.is_authenticated %}
-    <a href="{% url 'fincalc_index' %}" class="btn btn-large">Get Started</a>
-    {% else %}
-    <a href="{% url 'signup' %}" class="btn btn-large">Sign Up</a>
-    <a href="{% url 'login' %}" class="btn btn-large">Log In</a>
-    {% endif %}
+
+    <div id="img-box" class="col s12 m6">
+      <img
+        src="https://images.unsplash.com/photo-1449157291145-7efd050a4d0e?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Image" class="row-img" />
+    </div>
   </div>
-  <!-- <style>
-  body {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-      url("https://images.unsplash.com/photo-1567450475250-21f5b6d98021?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-    background-attachment: fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
-    color: white;
-    /* Other background properties as needed */
-  }
-</style> -->
-  {% endblock %}
-</body>
+
+  <div class="row">
+    <div id="img-box" class="col s12 m6 order-s2">
+      <img
+        src="https://images.unsplash.com/photo-1499914485622-a88fac536970?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Image" class="row-img" />
+    </div>
+    <div id="text-box" class="col s12 m6 order-s1">
+      <h4>Our Mission</h4>
+      <p class="home-text">At MoneyMap, we go beyond comprehension to empower users in navigating their financial journeys. In today's dynamic
+      economic landscape, our mission is to provide individuals of all economic levels with the tools, insights, and support
+      needed to master their personal finances. We foster a financial ecosystem that transcends boundaries, promoting
+      inclusivity and resilience. MoneyMap is not just a platform; it's your companion on the path to financial well-being,
+      offering guidance, resources, and a collaborative community for your financial thrive.</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <div id="text-box" class="col s12 m6">
+      <a href="{% url 'fincalc_index' %}"><h4>Financial Health Calculator</h4></a>
+      <p>MoneyMap provides intuitive tools for budgeting, expense tracking, and saving, all in one place. Take control of your
+      finances with a customizable budgeting system that adapts to your unique lifestyle. Our app analyzes your spending
+      patterns, offering tailored suggestions to optimize your financial health.</p>
+    </div>
+
+    <div id="img-box" class="col s12 m6">
+      <img
+        src="https://images.unsplash.com/photo-1565372519925-842b7778defb?q=80&w=2971&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        alt="Image" class="row-img" />
+    </div>
+  </div>
+</div>
+{% endblock %}
