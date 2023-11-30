@@ -5,7 +5,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .finhealth import finhealth_index
+from .finhealth import get_finhealth
 from .models import Bill, User, Income, Expense, FinancialHealth, Location
 from .forms import UserForm, Profile
 
@@ -21,18 +21,19 @@ def fincalc_index(request):
 
 @login_required
 def finhealth_index(request):
-  finhealth= FinancialHealth.objects.filter(user=request.user)
-  bills= Bill.objects.filter(user=request.user)
-  monthly_bills = sum(bill.amount for bill in bills)
-  yearly_bills = monthly_bills * 12
-  income= Income.objects.filter(user=request.user)
-  yearly_income= sum(income.amount for income in income)
-  monthly_income= yearly_income / 12
-  rounded_monthly_income = round(monthly_income, 2)
-  expenses= Expense.objects.filter(user=request.user)
-  total_expenses = sum(expense.amount for expense in expenses)
-  yearly_estimated_expenses = total_expenses * 12
-  return render(request, 'finhealth/index.html', {'finhealth': finhealth, 'bills': bills, 'monthly_bills': monthly_bills, 'yearly_bills': yearly_bills, 'income': income, 'yearly_income': yearly_income, 'monthly_income': monthly_income, 'rounded_monthly_income': rounded_monthly_income,'expenses': expenses, 'total_expenses': total_expenses, 'yearly_estimated_expenses': yearly_estimated_expenses })
+#   finhealth= FinancialHealth.objects.filter(user=request.user)
+#   bills= Bill.objects.filter(user=request.user)
+#   monthly_bills = sum(bill.amount for bill in bills)
+#   yearly_bills = monthly_bills * 12
+#   income= Income.objects.filter(user=request.user)
+#   yearly_income= sum(income.amount for income in income)
+#   monthly_income= yearly_income / 12
+#   rounded_monthly_income = round(monthly_income, 2)
+#   expenses= Expense.objects.filter(user=request.user)
+#   total_expenses = sum(expense.amount for expense in expenses)
+#   yearly_estimated_expenses = total_expenses * 12
+  context = get_finhealth(request.user)
+  return render(request, 'finhealth/index.html', context)
 
 @login_required
 def bills_index(request):

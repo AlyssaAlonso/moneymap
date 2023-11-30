@@ -1,35 +1,43 @@
-from .models import Bill, User, Income, Expense, FinancialHealth
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from .models import Bill, Income, Expense, FinancialHealth, Profile
 
-@login_required
-def finhealth_index(request):
-  finhealth= FinancialHealth.objects.filter(user=request.user)
-  bills= Bill.objects.filter(user=request.user)
+
+
+def get_finhealth(user):
+  finhealth= FinancialHealth.objects.filter(user=user)
+  bills= Bill.objects.filter(user=user)
   monthly_bills = sum(bill.amount for bill in bills)
   yearly_bills = monthly_bills * 12
-  essential_bills = Bill.objects.filter(user = request.user, category='Essential')
-  nonessential_bills = Bill.objects.filter(user = request.user, category = 'Nonessential')
+  essential_bills = Bill.objects.filter(user = user, category='Essential')
+  nonessential_bills = Bill.objects.filter(user = user, category = 'Nonessential')
   total_essential_bills = sum(bill.amount for bill in essential_bills)
-  total_nonessential_bills = sum(bill.amount for bill in nonessential_bills)
+  total_nonessential_bills = sum(bill.amount for bill in nonessential_bills) 
+  first_name = user.first_name
+  last_name = user.last_name
+  full_name = first_name + ' ' + last_name
 
-  income= Income.objects.filter(user=request.user)
+  income= Income.objects.filter(user= user)
   yearly_income= sum(income.amount for income in income)
   monthly_income= yearly_income / 12
   rounded_monthly_income = round(monthly_income, 2)
 
-  expenses= Expense.objects.filter(user=request.user)
+  expenses= Expense.objects.filter(user= user)
   total_expenses = sum(expense.amount for expense in expenses)
   yearly_estimated_expenses = total_expenses * 12
-  essential_expenses = Expense.objects.filter(user = request.user, category='Essential')
-  nonessential_expenses = Expense.objects.filter(user = request.user, category = 'Nonessential')
+  essential_expenses = Expense.objects.filter(user =  user, category='Essential')
+  nonessential_expenses = Expense.objects.filter(user =  user, category = 'Nonessential')
   total_essential_expenses = sum(expense.amount for expense in essential_expenses)
   total_nonessential_expenses = sum(expense.amount for expense in nonessential_expenses)
+
+  non_essential_spending = total_nonessential_bills + total_nonessential_expenses
+  essential_spending = total_essential_bills + total_essential_expenses
+  savings = yearly_income - (yearly_bills + yearly_estimated_expenses)
 
   needs_percent = (yearly_bills + yearly_estimated_expenses) / yearly_income * 100
   savings_percent = ((yearly_income - (yearly_bills + yearly_estimated_expenses)) / yearly_income) * 100
   nonessential_percent = ((total_nonessential_bills + total_nonessential_expenses) / yearly_income) * 100
   essential_percent = ((total_essential_bills + total_essential_expenses) / yearly_income) * 100
+
+
 
   if (
     needs_percent <= 50 
@@ -213,6 +221,8 @@ def finhealth_index(request):
 
   financial_health_score = (needs_score + savings_score + nonessential_score + essential_score) / 4 
 
+  recommendations = get_recommendation(needs_score, nonessential_score, essential_score, savings_score)
+
   if financial_health_score == 100:
     financial_health_grade = 'A+'
   elif 95 <= financial_health_score < 100:
@@ -235,8 +245,9 @@ def finhealth_index(request):
     financial_health_grade = 'F'
   else:
     financial_health_grade = 'Not Specified!'
-
-  return render(request, 'finhealth/index.html', {
+  
+  
+  return  {
         'finhealth': finhealth,
         'bills': bills,
         'monthly_bills': monthly_bills,
@@ -257,11 +268,15 @@ def finhealth_index(request):
         'savings_score': savings_score,
         'nonessential_score': nonessential_score,
         'essential_score': essential_score,
-        'needs_recommendation': recommendations[0] if recommendations else None,
-        'nonessential_recommendation': recommendations[1] if recommendations and len(recommendations) > 1 else None,
-        'essential_recommendation': recommendations[2] if recommendations and len(recommendations) > 2 else None,
-        'savings_recommendation': recommendations[3] if recommendations and len(recommendations) > 3 else None,
-    })
+        'needs_recommendation': recommendations[0],
+        'nonessential_recommendation': recommendations[1],
+        'essential_recommendation': recommendations[2],
+        'savings_recommendation': recommendations[3],
+        'non_essential_spending': non_essential_spending,
+        'essential_spending': essential_spending,
+        "savings": savings,
+        'full_name': full_name,
+    }
 
 def get_recommendation(needs_score, nonessential_score, essential_score, savings_score):
     recommendations = []
@@ -341,3 +356,5 @@ def get_recommendation(needs_score, nonessential_score, essential_score, savings
         recommendations.append("Consider substantial changes in your savings strategy.")
     elif 60 <= savings_score < 65:
         recommendations.append("Your savings are in a critical state. Immediate action is recommended.")
+
+    return recommendations
