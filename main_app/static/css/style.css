@@ -44,16 +44,13 @@ a:hover {
 }
 
 .homepage-body {
-  background: linear-gradient(rgba(220, 187, 87, 0.75), rgba(9, 139, 84, 0.75));
   background-attachment: fixed;
   background-size: cover;
   background-repeat: no-repeat;
-  color: white;
 }
 
 .homepage-header h1 {
   font-size: 5vw;
-  /* color: #dcbb57; */
   text-transform: uppercase;
 }
 
@@ -67,5 +64,5 @@ a:hover {
 }
 
 .homepage-content {
-  margin-top: 10vw;
+  margin-top: 8vw;
 }
