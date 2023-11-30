@@ -43,14 +43,6 @@ a:hover {
   height: auto;
 }
 
-.table-container {
-  margin-left: 0px;
-}
-
-div.col.s8.table-col {
-  padding: 0px;
-}
-
 .homepage-body {
   background: linear-gradient(rgba(220, 187, 87, 0.75), rgba(9, 139, 84, 0.75));
   background-attachment: fixed;
