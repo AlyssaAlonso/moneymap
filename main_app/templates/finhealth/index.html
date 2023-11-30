@@ -1,44 +1,43 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>Financial Health</h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col s8">
-            <table class="striped">
-                <tbody>
-                    <tr>
-                        <td>User</td>
-                        <td>Username</td>
-                    </tr>
-                    <tr>
-                        <td>Yearly Income</td>
-                        <td>${{yearly_income}}</td>
-                    </tr>
-                    <tr>
-                        <td>Monthly Income</td>
-                        <td>${{rounded_monthly_income}}</td>
-                    </tr>
-                    <tr>
-                        <td>Yearly Expenses</td>
-                        <td>${{ yearly_estimated_expenses }}</td>
-                    </tr>
-                    <tr>
-                        <td>Monthly Expenses</td>
-                        <td>${{ total_expenses }}</td>
-                    </tr>
-                    <tr>
-                        <td>Yearly Bills</td>
-                        <td>${{yearly_bills}}</td>
-                    </tr>
-                    <tr>
-                        <td>Monthly Bills</td>
-                        <td>${{monthly_bills}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="container table-container">
+  <div class="row">
+    <div class="col s8 table-col">
+      <table class="striped responsive-table">
+        <tbody>
+          <tr>
+            <td>User</td>
+            <td>Username</td>
+          </tr>
+          <tr>
+            <td>Yearly Income</td>
+            <td>${{yearly_income}}</td>
+          </tr>
+          <tr>
+            <td>Monthly Income</td>
+            <td>${{rounded_monthly_income}}</td>
+          </tr>
+          <tr>
+            <td>Yearly Expenses</td>
+            <td>${{ yearly_estimated_expenses }}</td>
+          </tr>
+          <tr>
+            <td>Monthly Expenses</td>
+            <td>${{ total_expenses }}</td>
+          </tr>
+          <tr>
+            <td>Yearly Bills</td>
+            <td>${{yearly_bills}}</td>
+          </tr>
+          <tr>
+            <td>Monthly Bills</td>
+            <td>${{monthly_bills}}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
 {% endblock %}

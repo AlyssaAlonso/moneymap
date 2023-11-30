@@ -18,6 +18,15 @@ a:hover {
   color: #dcbb57;
 }
 
+.btn {
+  background-color: #018060;
+}
+
+.btn:hover {
+  color: #dcbb57;
+  background-color: #317058;
+}
+
 .moneymap-logo {
   display: flex;
   justify-content: center;
@@ -32,4 +41,12 @@ a:hover {
 .row-img {
   width: 100%;
   height: auto;
+}
+
+.table-container {
+  margin-left: 0px;
+}
+
+div.col.s8.table-col {
+  padding: 0px;
 }
