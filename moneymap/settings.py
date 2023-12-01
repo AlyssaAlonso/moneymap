@@ -83,8 +83,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'moneymap',
-        'HOST': 'localhost',  
-        'PORT': '5432',
+        
     }
 }
 
