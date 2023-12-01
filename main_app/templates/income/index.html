@@ -1,21 +1,34 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 
 <h1>Income Report</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">Summary</span>
+    <p>Total Yearly Income: ${{ yearly_income }}</p>
+    <p>Total Monthly Income: ${{ rounded_monthly_income }}</p>
+  </div>
+  <div class="card-action">
+    <a href="{% url 'income_create' %}" class="btn">Add an Income</a>
+  </div>
+</div>
+<br />
+<hr />
+<br />
+
 {% for income in income %}
 <div class="card">
-    <div class="card-content">
-        <span class="card-title">Income Sources</span>
-        <p>Yearly Salary: ${{ income.yearly_salary }}</p>
-        <p>Other Income: ${{ income.other_income }}</p>
-    </div>
-    <div class="card-action">
-        <a href="{% url 'income_update' income.id %}">Edit</a>
-        <a href="{% url 'income_delete' income.id %}">Delete</a>
-    </div>
+  <div class="card-content">
+    <span class="card-title">{{ income.name }}</span>
+    <p>Category: {{ income.category }}</p>
+    <p>Amount: ${{ income.amount }}</p>
+  </div>
+  <div class="card-action">
+    <form action="{% url 'income_delete' income.id %}" method="POST">
+      {% csrf_token %}
+      <a href="{% url 'income_update' income.id %}" class="btn">Edit</a>
+      <input type="submit" value="Delete" class="btn" />
+    </form>
+  </div>
 </div>
-{% endfor %}
-
-<p>Yearly Income: ${{ yearly_income }}</p>
-<p>Monthly Income: ${{ rounded_monthly_income }}</p>
-{% endblock %}
+{% endfor %} {% endblock %}

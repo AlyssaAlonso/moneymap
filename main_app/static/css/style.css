@@ -48,6 +48,25 @@ a:hover {
 .row-img {
   width: 100%;
   height: auto;
+  border-radius: 12px;
+}
+
+.homepage-body {
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.home-container{
+  padding-top: 15px;
+  width: 100%;
+}
+.homepage-header h1 {
+  font-size: 5vw;
+  text-transform: uppercase;
+}
+
+.homepage-header span {
+  color: #018060;
 }
 
 img {
@@ -89,7 +108,11 @@ div.col.s8.table-col {
 }
 
 .homepage-content {
+
   margin-top: 10vw;
+
+  margin-top: 8vw;
+
 }
 
 #text-box{
