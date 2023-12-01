@@ -6,8 +6,7 @@ MoneyMap is a personal finance management app that helps users track their incom
 
 ## Screenshots
 
-![Landing Page](./moneymap/main_app/static/images/Screen%20Shot%202023-11-30%20at%207.47.41%20PM.png)
-
+<img src="./main_app/static/images/Screen Shot 2023-11-30 at 7.47.41 PM.png" width="800">
 ## Technologies Used
 
 - Python
