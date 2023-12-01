@@ -1,1 +1,2 @@
-web: gunicorn moneymap.wsgi
+web: gunicorn -b 0.0.0.0:$PORT moneymap.wsgi
+
