@@ -3,7 +3,11 @@ body {
   min-height: 100vh;
   flex-direction: column;
 }
-
+h4{
+  color: rgba(220, 187, 87, 0.75);
+  text-decoration: underline;
+  text-emphasis: bold;
+}
 main {
   flex: 1 0 auto;
 }
@@ -13,7 +17,10 @@ footer.page-footer {
   text-align: right;
   background-color: #018060;
 }
-
+.containter{
+  margin: 0;
+  width: 100vw;
+}
 a:hover {
   color: #dcbb57;
 }
@@ -41,6 +48,7 @@ a:hover {
 .row-img {
   width: 100%;
   height: auto;
+  border-radius: 12px;
 }
 
 .homepage-body {
@@ -48,7 +56,10 @@ a:hover {
   background-size: cover;
   background-repeat: no-repeat;
 }
-
+.home-container{
+  padding-top: 15px;
+  width: 100%;
+}
 .homepage-header h1 {
   font-size: 5vw;
   text-transform: uppercase;
@@ -65,4 +76,19 @@ a:hover {
 
 .homepage-content {
   margin-top: 8vw;
+}
+
+#text-box{
+  padding-right: 30px;
+  padding-left: 30px;
+}
+
+#img-box{
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.home-text{
+  padding-top: 10px;
 }
