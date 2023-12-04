@@ -1,4 +1,4 @@
-from .models import Bill, Income, Expense, FinancialHealth, Profile
+from .models import Bill, Income, Expense, FinancialHealth
 
 
 
@@ -28,196 +28,20 @@ def get_finhealth(user):
   total_essential_expenses = sum(expense.amount for expense in essential_expenses)
   total_nonessential_expenses = sum(expense.amount for expense in nonessential_expenses)
 
-  non_essential_spending = total_nonessential_bills + total_nonessential_expenses
-  essential_spending = total_essential_bills + total_essential_expenses
+  non_essential_spending = (total_nonessential_bills + total_nonessential_expenses) * 12
+  essential_spending = (total_essential_bills + total_essential_expenses) * 12
   savings = yearly_income - (yearly_bills + yearly_estimated_expenses)
 
   needs_percent = (yearly_bills + yearly_estimated_expenses) / yearly_income * 100
   savings_percent = ((yearly_income - (yearly_bills + yearly_estimated_expenses)) / yearly_income) * 100
-  nonessential_percent = ((total_nonessential_bills + total_nonessential_expenses) / yearly_income) * 100
-  essential_percent = ((total_essential_bills + total_essential_expenses) / yearly_income) * 100
+  nonessential_percent = (non_essential_spending / yearly_income) * 100
+  essential_percent = (essential_spending / yearly_income) * 100
 
+  needs_score = calculate_score(needs_percent, needs_ranges)
+  essential_score = calculate_score(essential_percent, essential_ranges)
+  nonessential_score = calculate_score(nonessential_percent, nonessential_ranges)
+  savings_score= calculate_score( savings_percent, savings_ranges) 
 
-
-  if (
-    needs_percent <= 50 
-  ):
-    needs_score = 100
-  elif (
-    50 < needs_percent <= 55
-  ):
-    needs_score = 95
-  elif (
-    55 < needs_percent <=60
-  ):
-    needs_score = 90
-  elif(
-    60 < needs_percent <= 65
-  ):
-    needs_score = 85
-  elif(
-    65 < needs_percent <= 70
-  ):
-    needs_score = 80
-  elif(
-    70 < needs_percent <= 75
-  ):
-    needs_score = 75
-  elif(
-    75 < needs_percent <= 80
-  ):
-    needs_score = 70
-  elif(
-    80 < needs_percent <= 85
-  ):
-    needs_score = 65
-  elif(
-    85 < needs_percent <= 90
-  ):
-    needs_score = 60
-  elif(
-    90 < needs_percent <= 95
-  ):
-    needs_score = 55
-  elif(
-    95 < needs_percent <= 100
-  ):
-    needs_score = 50
-
-  if (
-    nonessential_percent <= 15 
-  ):
-    nonessential_score = 100
-  elif (
-    15 <= nonessential_percent <= 17
-  ):
-    nonessential_score = 95
-  elif (
-    17 < nonessential_percent <= 19
-  ):
-    nonessential_score = 90
-  elif(
-    19 < nonessential_percent <= 21
-  ):
-    nonessential_score = 85
-  elif(
-    21 < nonessential_percent <= 23
-  ):
-    nonessential_score = 80
-  elif(
-    23 < nonessential_percent <= 25
-  ):
-    nonessential_score = 75
-  elif(
-    25 < nonessential_percent <= 27
-  ):
-    nonessential_score = 70
-  elif(
-    27 < nonessential_percent <= 29
-  ):
-    nonessential_score = 65
-  elif(
-    29 < nonessential_percent <= 30
-  ):
-    nonessential_score = 60
-  elif(
-    30 < nonessential_percent <= 32
-  ):
-    nonessential_score = 55
-  elif(
-    32 < nonessential_percent <= 35
-  ):
-    nonessential_score = 50
-
-  if (
-    essential_percent <= 30 
-  ):
-    essential_score = 100
-  elif (
-    30 < essential_percent <= 33
-  ):
-    essential_score = 95
-  elif (
-    33 < essential_percent <= 35
-  ):
-    essential_score = 90
-  elif(
-    35 < essential_percent <= 38
-  ):
-    essential_score = 85
-  elif(
-    38 < essential_percent <= 41
-  ):
-    essential_score = 80
-  elif(
-    41 < essential_percent <= 44
-  ):
-    essential_score = 75
-  elif(
-    44 < essential_percent <= 47
-  ):
-    essential_score = 70
-  elif(
-    47 < essential_percent <= 50
-  ):
-    essential_score = 65
-  elif(
-    50 < essential_percent <= 53
-  ):
-    essential_score = 60
-  elif(
-    53 < essential_percent <= 56
-  ):
-    essential_score = 55
-  elif(
-    56 < essential_percent <= 59
-  ):
-    essential_score = 50
-
-  if (
-    savings_percent >= 30 
-  ):
-    savings_score = 100
-  elif (
-    25 <= savings_percent < 30
-  ):
-    savings_score = 95
-  elif (
-    20 <= savings_percent < 25
-  ):
-    savings_score = 90
-  elif(
-    17 <= savings_percent < 20
-  ):
-    savings_score = 85
-  elif(
-    15 <= savings_percent < 17
-  ):
-    savings_score = 80
-  elif(
-    13 <= savings_percent < 15
-  ):
-    savings_score = 75
-  elif(
-    11 <= savings_percent < 13
-  ):
-    savings_score = 70
-  elif(
-    9 <= savings_percent < 11
-  ):
-    savings_score = 65
-  elif(
-    7 <= savings_percent < 9
-  ):
-    savings_score = 60
-  elif(
-    4 <= savings_percent < 7
-  ):
-    savings_score = 55
-  elif(
-    1 <= savings_percent < 4
-  ):
-    savings_score = 50
 
   financial_health_score = (needs_score + savings_score + nonessential_score + essential_score) / 4 
 
@@ -262,6 +86,7 @@ def get_finhealth(user):
         'needs_percent': needs_percent,
         'savings_percent': savings_percent,
         'nonessential_percent': nonessential_percent,
+        'essential_percent': essential_percent,
         'financial_health_grade': financial_health_grade,
         'financial_health_score': financial_health_score,
         'needs_score': needs_score,
@@ -277,6 +102,65 @@ def get_finhealth(user):
         "savings": savings,
         'full_name': full_name,
     }
+def calculate_score(percent, score_ranges):
+    for lower, upper, score in score_ranges:
+        if lower <= percent <= upper:
+            return score
+
+savings_ranges = [
+    (30, 100, 100),
+    (25, 30, 95),
+    (20, 25, 90),
+    (17, 20, 85),
+    (15, 17, 80),
+    (13, 15, 75),
+    (11, 13, 70),
+    (9, 11, 65),
+    (7, 9, 60),
+    (4, 7, 55),
+    (1, 4, 50),
+]
+
+essential_ranges = [
+    (0, 30, 100),
+    (30, 35, 95),
+    (35, 40, 90),
+    (40, 45, 85),
+    (45, 50, 80),
+    (50, 60, 75),
+    (60, 65, 70),
+    (65, 70, 65),
+    (70, 75, 60),
+    (75, 80, 55),
+    (80, 100, 50),
+]
+
+nonessential_ranges = [
+    (0, 15, 100),
+    (15, 17, 95),
+    (17, 19, 90),
+    (19, 21, 85),
+    (21, 23, 80),
+    (23, 25, 75),
+    (25, 27, 70),
+    (27, 29, 65),
+    (29, 30, 60),
+    (30, 32, 55),
+    (32, 100, 50),
+]
+needs_ranges = [
+    (0, 50, 100),
+    (50, 55, 95),
+    (55, 60, 90),
+    (60, 65, 85),
+    (65, 70, 80),
+    (70, 75, 75),
+    (75, 80, 70),
+    (80, 85, 65),
+    (85, 90, 60),
+    (90, 95, 55),
+    (95, 100, 50),
+]
 
 def get_recommendation(needs_score, nonessential_score, essential_score, savings_score):
     recommendations = []
@@ -297,7 +181,7 @@ def get_recommendation(needs_score, nonessential_score, essential_score, savings
         recommendations.append("Your needs spending requires attention. Identify areas for reduction.")
     elif 65 <= needs_score < 70:
         recommendations.append("Consider substantial changes in managing your needs spending.")
-    elif 60 <= needs_score < 65:
+    elif 00 <= needs_score < 65:
         recommendations.append("Your needs spending is in a critical state. Immediate action is recommended.")
             
     if nonessential_score == 100:
@@ -316,7 +200,7 @@ def get_recommendation(needs_score, nonessential_score, essential_score, savings
         recommendations.append("Your nonessential spending requires attention. Identify areas for reduction.")
     elif 65 <= nonessential_score < 70:
         recommendations.append("Consider substantial changes in managing your nonessential spending.")
-    elif 60 <= nonessential_score < 65:
+    elif 0 <= nonessential_score < 65:
         recommendations.append("Your nonessential spending is in a critical state. Immediate action is recommended.")
 
     if essential_score == 100:
@@ -335,7 +219,7 @@ def get_recommendation(needs_score, nonessential_score, essential_score, savings
         recommendations.append("Your essential spending requires attention. Identify areas for reduction.")
     elif 65 <= essential_score < 70:
         recommendations.append("Consider substantial changes in managing your essential spending.")
-    elif 60 <= essential_score < 65:
+    elif 00 <= essential_score < 65:
         recommendations.append("Your essential spending is in a critical state. Immediate action is recommended.")
 
     if savings_score == 100:
@@ -354,7 +238,7 @@ def get_recommendation(needs_score, nonessential_score, essential_score, savings
         recommendations.append("Your savings require attention. Identify areas for enhancement.")
     elif 65 <= savings_score < 70:
         recommendations.append("Consider substantial changes in your savings strategy.")
-    elif 60 <= savings_score < 65:
+    elif 0 <= savings_score < 65:
         recommendations.append("Your savings are in a critical state. Immediate action is recommended.")
 
     return recommendations
