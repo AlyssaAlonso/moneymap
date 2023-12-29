@@ -18,7 +18,7 @@ MoneyMap is a personal finance management app that helps users track their incom
 
 ## Getting Started
 
-- **Deployed App:** [MoneyMap App](https://your-deployed-app-url.com)
+- **Deployed App:** [MoneyMap App](https://moneymapper-f4ea9e026bf3.herokuapp.com/)
 - **Trello Planning:** [Trello Board](https://lucid.app/lucidchart/958c09bb-0884-4834-8ac0-1268ba3d4997/edit?invitationId=inv_95a64b08-08e7-4633-80c4-55054f561857)
 
 To run the app locally:
